@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:new_tracker/welcome_page.dart';
+import 'package:new_tracker/models/task_provider_model.dart';
+import 'package:new_tracker/pages/welcome_page/welcome_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const NewTracker());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TaskProvider(),
+      child: const NewTracker(),
+    ),
+  );
 }
 
 class NewTracker extends StatelessWidget {
@@ -10,9 +17,13 @@ class NewTracker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      title: 'Task Manager',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const WelcomePage(),
     );
   }
 }
